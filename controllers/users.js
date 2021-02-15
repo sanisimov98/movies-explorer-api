@@ -10,7 +10,6 @@ module.exports.createUser = (req, res, next) => {
     const {
       email, password, name,
     } = req.body;
-    console.log(email, password, name);
     bcrypt.hash(password, 10).then((hash) => {
       Users.create({
         email, password: hash, name,
@@ -22,7 +21,6 @@ module.exports.createUser = (req, res, next) => {
           });
         })
         .catch((err) => {
-          console.log(err);
           if (err.name === 'ValidationError') {
             throw new WrongDataError('Переданы неверные данные');
           } else if (err.name === 'MongoError' && err.code === 11000) {

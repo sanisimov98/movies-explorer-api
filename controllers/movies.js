@@ -43,7 +43,6 @@ module.exports.createMovie = (req, res, next) => {
       .then((movie) => res.send({ data: movie }))
       .catch((err) => {
         if (err.name === 'ValidationError') {
-          console.log(err);
           throw new WrongDataError('Некорректные данные фильма');
         } else {
           next(err);
