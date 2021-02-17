@@ -64,11 +64,8 @@ module.exports.deleteMovie = (req, res, next) => {
         if ((req.user._id) !== movie.owner.toString()) {
           throw new ForbiddenError('Фильм может удалить только создавший его пользователь');
         }
-        Movies.findByIdAndRemove(req.params.movieId)
-          .then((removed) => {
-            res.send({ data: removed });
-          })
-          .catch(next);
+        movie.remove();
+        res.send({ data: movie });
       })
       .catch((err) => {
         if (err.name === 'CastError') {
