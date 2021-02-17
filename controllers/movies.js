@@ -72,7 +72,7 @@ module.exports.deleteMovie = (req, res, next) => {
       })
       .catch((err) => {
         if (err.name === 'CastError') {
-          throw new NotFoundError('Фильм не найден');
+          throw new WrongDataError('Фильм не найден');
         } else {
           next(err);
         }

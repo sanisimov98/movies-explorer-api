@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt');
 const Users = require('../models/user');
 const WrongDataError = require('../errors/wrong-data-error');
-// const ForbiddenError = require('../errors/forbidden-error');
 const EmailAlreadyInUseError = require('../errors/email-already-in-use-error');
 const NotFoundError = require('../errors/not-found-error');
 
