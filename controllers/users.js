@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const Users = require('../models/user');
 const WrongDataError = require('../errors/wrong-data-error');
-const EmailAlreadyInUseError = require('../errors/email-already-in-use-error');
+const ConflictError = require('../errors/conflict-error');
 const NotFoundError = require('../errors/not-found-error');
 
 module.exports.createUser = (req, res, next) => {
@@ -23,7 +23,7 @@ module.exports.createUser = (req, res, next) => {
           if (err.name === 'ValidationError') {
             throw new WrongDataError('Переданы неверные данные');
           } else if (err.name === 'MongoError' && err.code === 11000) {
-            throw new EmailAlreadyInUseError('Этот адрес электронной почты уже используется!');
+            throw new ConflictError('Этот адрес электронной почты уже используется!');
           } else {
             next(err);
           }
