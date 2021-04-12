@@ -32,6 +32,7 @@ router.post('/', celebrate({
       }
       return helpers.message('Поле thumbnail заполнено неверно');
     }),
+    movieId: Joi.number().required(),
   }).unknown(),
 }), createMovie);
 router.delete('/:movieId', deleteMovie);
