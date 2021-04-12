@@ -4,8 +4,10 @@ const ForbiddenError = require('../errors/forbidden-error');
 const NotFoundError = require('../errors/not-found-error');
 
 module.exports.getMovies = (req, res, next) => {
+  const owner = req.user._id;
+
   try {
-    Movies.find({})
+    Movies.find({ owner })
       .then((movies) => {
         if (!movies) {
           throw new Error();
